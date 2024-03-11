@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerCam : MonoBehaviour
 {
@@ -16,11 +18,14 @@ public class PlayerCam : MonoBehaviour
     public float xRotation;
     public float yRotation;
 
+    // Distamcia mira
+    public float distance;
+
     private void Start()
     {
         // Volvemos el cursor invisible y impedimos su movimiento en el primer frame
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
     }
 
     private void Update()
@@ -39,4 +44,5 @@ public class PlayerCam : MonoBehaviour
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
+
 }
