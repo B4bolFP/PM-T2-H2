@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     public Camera fpsCam;
     public Transform attackPoint;
     public RaycastHit rayHit;
-    public LayerMask whatIsEnemy;
+    public LayerMask enemyLayer;
 
     //Graphics
     public GameObject muzzleFlash, bulletHoleGraphic;
@@ -65,10 +65,14 @@ public class Weapon : MonoBehaviour
         Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
 
         //RayCast
-        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, whatIsEnemy))
+        if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range, enemyLayer))
         {
             Debug.Log(rayHit.collider.name);
 
+            if (rayHit.collider.CompareTag("enemy"))
+            {
+                rayHit.collider.GetComponent<BaseEnemyFSM>().TakeDamage(damage);
+            }
         }
 
 

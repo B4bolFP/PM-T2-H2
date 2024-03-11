@@ -24,16 +24,23 @@ public class BaseEnemyFSM : MonoBehaviour
 
     public float stun_time_ = 2.0f;
 
+    public float health;
+    float maxHealth;
+
+    [SerializeField] FloatingHealthBar healthBar_;
+
     private void Awake()
     {
         agent_ = GetComponentInParent<NavMeshAgent>();
+        healthBar_ = GetComponentInChildren<FloatingHealthBar>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        healthBar_.UpdateHealthBar(health, maxHealth);
+        maxHealth = health;
+}
 
     // Update is called once per frame
     void Update()
@@ -61,7 +68,6 @@ public class BaseEnemyFSM : MonoBehaviour
     void MindWait()
     {
         BodyWait();
-        Debug.Log("Waiting");
         //añadir corrutina stun time
         current_mind_state_ = MindStates.kSeek;
 
@@ -69,7 +75,6 @@ public class BaseEnemyFSM : MonoBehaviour
     void MindSeek()
     {
         BodySeek();
-        Debug.Log("Seeking");
 
         if(sight_sensor_.detected_object_ != null)
         {
@@ -80,7 +85,6 @@ public class BaseEnemyFSM : MonoBehaviour
     void MindPursuit()
     {
         BodyPursuit();
-        Debug.Log("Following");
 
         if(sight_sensor_.detected_object_ == null)
         {
@@ -98,7 +102,6 @@ public class BaseEnemyFSM : MonoBehaviour
     void MindAttack()
     {
         BodyAttack();
-        Debug.Log("Attacking");
 
         if (sight_sensor_.detected_object_ == null)
         {
@@ -115,7 +118,6 @@ public class BaseEnemyFSM : MonoBehaviour
     void MindFlee()
     {
         BodyFlee();
-        Debug.Log("Fleeing");
     }
 
     void BodyWait()
@@ -144,6 +146,22 @@ public class BaseEnemyFSM : MonoBehaviour
     void BodyFlee()
     {
 
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health  -= damage;
+        healthBar_.UpdateHealthBar(health, maxHealth);
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
