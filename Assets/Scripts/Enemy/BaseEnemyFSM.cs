@@ -24,10 +24,16 @@ public class BaseEnemyFSM : MonoBehaviour
 
     public float stun_time_ = 2.0f;
 
+    public float attackCooldown;
+    private float auxAttackCooldown = 0f;
+    private bool canAttack = true;
+
     public float health;
     float maxHealth;
 
     [SerializeField] FloatingHealthBar healthBar_;
+
+    public PlayerHealth player;
 
     private void Awake()
     {
@@ -45,7 +51,13 @@ public class BaseEnemyFSM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        auxAttackCooldown += Time.deltaTime;
+
+        if (auxAttackCooldown >= attackCooldown)
+        {
+            canAttack = true;
+        }
+
         if(current_mind_state_ == MindStates.kWait)
         {
             MindWait();
@@ -101,7 +113,12 @@ public class BaseEnemyFSM : MonoBehaviour
     }
     void MindAttack()
     {
-        BodyAttack();
+        if (canAttack)
+        {
+            BodyAttack();
+            canAttack = false;
+            auxAttackCooldown = 0f;
+        }
 
         if (sight_sensor_.detected_object_ == null)
         {
@@ -142,6 +159,7 @@ public class BaseEnemyFSM : MonoBehaviour
     {
         agent_.isStopped = true;
         //atacar o algo
+        player.damage(10);
     }
     void BodyFlee()
     {

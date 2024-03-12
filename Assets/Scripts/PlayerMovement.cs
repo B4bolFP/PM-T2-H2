@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, queEsSuelo);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.7f, queEsSuelo);
 
         MyInput();
         SpeedControl();
@@ -66,12 +66,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
         {
-
             rb.drag = groundDrag;
             jumpsLeft = jumps;
         } else
         {
-
             rb.drag = 0;
         }
     }

@@ -6,7 +6,6 @@ public class Sight : MonoBehaviour
 {
 
     public float distance_;
-    public float angle_;
     public LayerMask sensor_layer_;
     public LayerMask obstacles_layer_;
 
@@ -32,22 +31,18 @@ public class Sight : MonoBehaviour
 
             Vector3 dir_to_collider = Vector3.Normalize(single_collider.bounds.center - transform.position);
 
-            // Angle -> coste alto / alternativa Dot
-            float angle_to_collider = Vector3.Angle(transform.forward, dir_to_collider);
 
-            if(angle_to_collider < angle_)
+            if(!Physics.Linecast(transform.position, single_collider.bounds.center, out RaycastHit hit, obstacles_layer_))
             {
-                if(!Physics.Linecast(transform.position, single_collider.bounds.center, out RaycastHit hit,  obstacles_layer_))
-                {
-                    Debug.DrawLine(transform.position, single_collider.bounds.center, Color.green);
-                    detected_object_ = single_collider;
-                    break;
-                }
-                else
-                {
-                    Debug.DrawLine(transform.position, hit.point, Color.red);
-                }
+                Debug.DrawLine(transform.position, single_collider.bounds.center, Color.green);
+                detected_object_ = single_collider;
+                break;
             }
+            else
+            {
+                Debug.DrawLine(transform.position, hit.point, Color.red);
+            }
+
         }
 
     }
@@ -62,11 +57,5 @@ public class Sight : MonoBehaviour
         Gizmos.color = Color.cyan;
 
         Gizmos.DrawWireSphere(transform.position, distance_);
-
-        Vector3 right_dir = Quaternion.Euler(0.0f, angle_, 0.0f) * transform.forward;
-        Gizmos.DrawRay(transform.position, right_dir * distance_);
-
-        Vector3 left_dir = Quaternion.Euler(0.0f, -angle_, 0.0f) * transform.forward;
-        Gizmos.DrawRay(transform.position, left_dir * distance_);
     }
 }
