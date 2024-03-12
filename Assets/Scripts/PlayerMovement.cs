@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
 
     public float groundDrag;
 
+    public int jumps;
+    private int jumpsLeft;
+
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -49,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        jumpsLeft = jumps - 1;
         resetJump();
     }
 
@@ -61,9 +65,15 @@ public class PlayerMovement : MonoBehaviour
         StateHandler();
 
         if (grounded)
+        {
+
             rb.drag = groundDrag;
-        else
+            jumpsLeft = jumps;
+        } else
+        {
+
             rb.drag = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -76,14 +86,17 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(Input.GetKey(jumpKey) && readyToJump && jumpsLeft > 0)
         {
             readyToJump = false;
 
             jump();
+            jumpsLeft -= 1;
 
             Invoke(nameof(resetJump), jumpCooldown);
         }
+
+        
     }
 
     public void StateHandler()
@@ -139,6 +152,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
+
 
     private void resetJump()
     {
