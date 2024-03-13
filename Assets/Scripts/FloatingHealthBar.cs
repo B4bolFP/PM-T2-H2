@@ -8,7 +8,12 @@ public class FloatingHealthBar : MonoBehaviour
 {
 
     [SerializeField] private Slider slider;
-    [SerializeField] private Transform player;
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
+    }
 
     public void UpdateHealthBar(float currentValue, float maxValue)
     {
@@ -20,7 +25,7 @@ public class FloatingHealthBar : MonoBehaviour
     void Update()
     {
 
-        Vector3 relativepos = player.position - transform.position;
+        Vector3 relativepos = player.transform.position - transform.position;
         transform.rotation = Quaternion.LookRotation(relativepos, Vector3.up);
     }
 }

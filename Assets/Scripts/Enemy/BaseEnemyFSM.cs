@@ -33,7 +33,8 @@ public class BaseEnemyFSM : MonoBehaviour
 
     [SerializeField] FloatingHealthBar healthBar_;
 
-    public PlayerHealth player;
+    private GameObject player;
+    private PlayerHealth playerHealth;
 
     private void Awake()
     {
@@ -46,7 +47,9 @@ public class BaseEnemyFSM : MonoBehaviour
     {
         healthBar_.UpdateHealthBar(health, maxHealth);
         maxHealth = health;
-}
+        player = GameObject.Find("Player");
+        playerHealth = player.GetComponent<PlayerHealth>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -159,7 +162,7 @@ public class BaseEnemyFSM : MonoBehaviour
     {
         agent_.isStopped = true;
         //atacar o algo
-        player.damage(10);
+        playerHealth.damage(10);
     }
     void BodyFlee()
     {
@@ -186,8 +189,5 @@ public class BaseEnemyFSM : MonoBehaviour
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attack_distance_);
-
     }
-
-    
 }

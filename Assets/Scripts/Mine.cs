@@ -12,7 +12,18 @@ public class Mine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) 
+        blowMine(other);
+    }
+
+    IEnumerator destroyMine()
+    {
+        yield return new WaitForSeconds(mineSpeed);
+        Destroy(gameObject);
+    }
+
+    public void blowMine(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
             other.GetComponentInParent<PlayerHealth>().damage(50);
             eeexplosion.Play();
@@ -20,9 +31,9 @@ public class Mine : MonoBehaviour
         }
     }
 
-    IEnumerator destroyMine()
+    public void shootMine()
     {
-        yield return new WaitForSeconds(mineSpeed);
-        Destroy(gameObject);
+        eeexplosion.Play();
+        StartCoroutine("destroyMine");
     }
 }

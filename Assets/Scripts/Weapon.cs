@@ -73,11 +73,17 @@ public class Weapon : MonoBehaviour
             {
                 rayHit.collider.GetComponent<BaseEnemyFSM>().TakeDamage(damage);
             }
+
+            if (rayHit.collider.CompareTag("mine"))
+            {
+                rayHit.collider.GetComponent<Mine>().shootMine();
+            }
         }
 
 
         //Graphics
-        Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
+        Instantiate(bulletHoleGraphic, rayHit.transform);
+
         Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
         bulletsLeft--;

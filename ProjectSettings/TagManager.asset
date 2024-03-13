@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FxTemporaire
   - enemy
+  - mine
   layers:
   - Default
   - TransparentFX
