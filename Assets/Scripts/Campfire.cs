@@ -12,16 +12,18 @@ public class Campfire : MonoBehaviour
     private float auxHealingCooldown;
     private bool canHeal = false;
     private GameObject player;
+    private PlayerHealth playerObj;
 
     private void Start()
     {
         player = GameObject.Find("Player");
+        playerObj = player.GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (canHeal)
+        if (canHeal && playerObj.health <= 100)
         {
             heal();
         }
@@ -46,6 +48,6 @@ public class Campfire : MonoBehaviour
     private void heal()
     {
         finalHeal = healingAmount * healingMultiply;
-        player.GetComponent<PlayerHealth>().heal(finalHeal);
+        playerObj.heal(finalHeal);
     }
 }
