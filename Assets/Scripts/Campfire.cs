@@ -23,7 +23,7 @@ public class Campfire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canHeal && playerObj.health <= 100)
+        if (canHeal && playerObj.health < 100)
         {
             heal();
         }

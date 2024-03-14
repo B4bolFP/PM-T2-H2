@@ -17,6 +17,7 @@ public class PlayerHealth : MonoBehaviour
     private void Update()
     {
         healthText.text = "Health: " + health;
+        if (health > 100) { health = 100; }
     }
 
     public void heal(int amount)

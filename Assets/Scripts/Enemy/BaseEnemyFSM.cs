@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,10 +32,16 @@ public class BaseEnemyFSM : MonoBehaviour
     public float health;
     float maxHealth;
 
+    public bool divides;
+    public GameObject redEnemy;
+    public GameObject grayEnemy;
+    public Transform purpleSpawnPoint;
+
     [SerializeField] FloatingHealthBar healthBar_;
 
     private GameObject player;
     private PlayerHealth playerHealth;
+
 
     private void Awake()
     {
@@ -174,7 +181,10 @@ public class BaseEnemyFSM : MonoBehaviour
         health  -= damage;
         healthBar_.UpdateHealthBar(health, maxHealth);
 
-        if (health <= 0)
+        if (divides && health <= 0)
+        {
+            DiePurple();
+        } else
         {
             Die();
         }
@@ -182,7 +192,25 @@ public class BaseEnemyFSM : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        if (divides && redEnemy.gameObject != null && grayEnemy.gameObject != null)
+        {
+            redEnemy.SetActive(true);
+            grayEnemy.SetActive(true);
+            Instantiate(redEnemy, purpleSpawnPoint);
+            Instantiate(grayEnemy, purpleSpawnPoint);
+        } else
+        {
+            Destroy(gameObject);
+        }
+
+    }
+
+    void DiePurple()
+    {
+        if (redEnemy.gameObject == null && grayEnemy.gameObject == null)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnDrawGizmos()
