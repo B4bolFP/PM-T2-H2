@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool gameIsPaused = false;
 
     public GameObject pauseMenuUI;
+
 
     // Update is called once per frame
     void Update()
@@ -32,6 +33,7 @@ public class PauseMenu : MonoBehaviour
 
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
+
     }
 
     public void Pause()
@@ -43,4 +45,18 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0.0f;
         gameIsPaused = true;
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1.0f;
+        gameIsPaused = false;
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1.0f;
+    }
+
 }

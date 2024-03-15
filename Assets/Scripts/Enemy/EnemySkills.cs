@@ -13,14 +13,6 @@ public class EnemySkills : MonoBehaviour
 
     public Transform mineSpawner;
     public GameObject mine;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
 
@@ -33,8 +25,6 @@ public class EnemySkills : MonoBehaviour
 
         if (dropsMines) { dropMine(); }
 
-
-        
     }
 
     private void dropMine()

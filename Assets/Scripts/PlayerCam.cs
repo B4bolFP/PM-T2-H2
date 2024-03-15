@@ -8,8 +8,8 @@ public class PlayerCam : MonoBehaviour
 {
     // Variables de sensibilidad publicas
     // De esta forma podremos cambiarlos desde el menu
-    public float sensX;
-    public float sensY;
+    public static float sensX = 400;
+    public static float sensY = 400;
 
     // Cambiaremos la direccion de la camara con este transform
     public Transform orientation;

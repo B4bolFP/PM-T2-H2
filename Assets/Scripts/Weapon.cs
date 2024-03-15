@@ -37,7 +37,13 @@ public class Weapon : MonoBehaviour
         MyInput();
 
         //SetText
-        text.SetText(bulletsLeft + " / " + magazineSize);
+        if (bulletsLeft == 0)
+        {
+            text.SetText("Reload R");
+        } else
+        {
+            text.SetText(bulletsLeft + " / " + magazineSize);
+        }
     }
     private void MyInput()
     {

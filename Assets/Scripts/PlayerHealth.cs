@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -17,6 +18,12 @@ public class PlayerHealth : MonoBehaviour
     private void Update()
     {
         healthText.text = "Health: " + health;
+        if (health <= 0) 
+        {
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+            UnityEngine.Cursor.visible = true;
+            SceneManager.LoadScene(2);
+        }
         if (health > 100) { health = 100; }
     }
 
