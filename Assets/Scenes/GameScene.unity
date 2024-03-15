@@ -1834,7 +1834,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -5116,15 +5116,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1931354252}
     m_Modifications:
+    - target: {fileID: 1005976816940173274, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1271974432122817183, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1307833768275533633, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 2672037676764586311, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2717983536438904962, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3454839993356230112, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3898682304474292045, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
         type: 3}
@@ -5141,10 +5161,20 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
+    - target: {fileID: 5556282897261689444, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5937695856745725951, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7447937584737850036, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7476359584069288010, guid: 71d719bf3ef2a5642ae4bedc5fe5cb8d,
         type: 3}

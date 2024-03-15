@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI enemiesLeftText;
 
@@ -34,7 +33,12 @@ public class GameManager : MonoBehaviour
 
         enemiesLeft = GameObject.FindGameObjectsWithTag("enemy").Length;
 
-        if (currentRound == 4) { SceneManager.LoadScene(2); }
+        if (currentRound == 4) 
+        {
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+            UnityEngine.Cursor.visible = true;
+            SceneManager.LoadScene(2); 
+        }
 
         if (enemiesLeft <= 0 && currentRound < 4)
         {
